@@ -152,9 +152,10 @@ async def process_paper_queue():
 
 async def monitor_zotero_background():
     """Background task to monitor Zotero for changes"""
+    loop = asyncio.get_running_loop()
 
     def process_callback(item):
-        asyncio.create_task(processing_queue.put(item))
+        asyncio.run_coroutine_threadsafe(processing_queue.put(item), loop)
 
     await asyncio.to_thread(
         zotero_monitor.monitor_loop,
