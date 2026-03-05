@@ -1,0 +1,11 @@
+{
+  "id": "zotero-ai-assistant",
+  "name": "Zotero AI Research Assistant",
+  "version": "1.0.0",
+  "minAppVersion": "1.4.0",
+  "description": "Intelligent research paper processing from Zotero using AWS Bedrock AI",
+  "author": "Research Assistant",
+  "authorUrl": "https://github.com/yourusername/zotero-obsidian-ai",
+  "isDesktopOnly": true,
+  "js": "main.js"
+}

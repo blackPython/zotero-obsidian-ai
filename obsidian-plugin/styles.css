@@ -1,0 +1,23 @@
+/* Zotero AI Research Assistant - Plugin Styles */
+
+.zotero-ai-qa-modal textarea {
+  width: 100%;
+  margin: 10px 0;
+  resize: vertical;
+}
+
+.zotero-ai-modal-buttons {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.zotero-ai-analysis-select {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.zotero-ai-prompt-editor textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  resize: vertical;
+}

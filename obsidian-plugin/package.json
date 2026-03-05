@@ -1,0 +1,30 @@
+{
+  "name": "zotero-ai-assistant",
+  "version": "1.0.0",
+  "description": "Intelligent research paper processing from Zotero using AWS Bedrock AI",
+  "main": "main.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "node esbuild.config.mjs production",
+    "test": "jest"
+  },
+  "keywords": [
+    "obsidian",
+    "zotero",
+    "ai",
+    "research",
+    "bedrock"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "builtin-modules": "^3.3.0",
+    "esbuild": "^0.20.1",
+    "obsidian": "latest",
+    "tslib": "^2.8.1",
+    "typescript": "^5.3.3"
+  }
+}

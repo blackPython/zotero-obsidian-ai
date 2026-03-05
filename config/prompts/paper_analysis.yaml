@@ -1,0 +1,129 @@
+# Customizable Prompt Templates for Paper Analysis
+# Edit these prompts to customize how papers are analyzed
+
+initial_analysis:
+  system_prompt: |
+    You are an expert research assistant specializing in academic paper analysis.
+    Your task is to provide comprehensive, structured analysis of research papers.
+    Focus on extracting key insights, methodologies, and contributions.
+
+  main_prompt: |
+    Analyze this research paper and provide the following:
+
+    1. **Summary** (2-3 paragraphs)
+       - Main research question/problem
+       - Key contributions
+       - Overall significance
+
+    2. **Methodology**
+       - Research approach
+       - Data sources/datasets
+       - Experimental setup
+       - Statistical methods (if applicable)
+
+    3. **Key Findings**
+       - Main results (bullet points)
+       - Statistical significance
+       - Practical implications
+
+    4. **Strengths and Limitations**
+       - What the paper does well
+       - Potential weaknesses or gaps
+       - Future research directions suggested
+
+    5. **Connections**
+       - Related work mentioned
+       - Potential applications
+       - Cross-disciplinary relevance
+
+    6. **Critical Questions**
+       - Unanswered questions
+       - Points needing clarification
+       - Potential follow-up studies
+
+    Paper Title: {title}
+    Authors: {authors}
+    Abstract: {abstract}
+    Full Text: {full_text}
+
+concept_extraction:
+  prompt: |
+    Extract the following concepts from this paper:
+
+    1. **Core Concepts** (main ideas, theories, frameworks)
+    2. **Technical Terms** (specialized vocabulary with definitions)
+    3. **Methodological Approaches**
+    4. **Datasets/Resources** mentioned
+    5. **Tools/Software** used
+    6. **Metrics/Evaluation** methods
+
+    Format as a structured list with brief explanations.
+
+    Paper content: {content}
+
+literature_connections:
+  prompt: |
+    Identify connections between this paper and the existing literature:
+
+    1. **Direct Citations** - Key papers this work builds upon
+    2. **Thematic Connections** - Papers addressing similar problems
+    3. **Methodological Similarities** - Papers using similar approaches
+    4. **Contradictions/Debates** - Papers with opposing findings
+    5. **Future Work** - Papers that could build on this
+
+    Paper: {paper_info}
+    Existing notes in library: {existing_notes}
+
+qa_system:
+  system_prompt: |
+    You are a research assistant with deep knowledge of the paper: "{title}".
+    Answer questions based on the paper's content. Be specific and cite relevant sections.
+    If the information is not in the paper, clearly state that.
+
+  qa_prompt: |
+    Based on the paper "{title}", please answer the following question:
+
+    Question: {question}
+
+    Paper context: {context}
+
+    Provide a detailed answer with:
+    1. Direct answer to the question
+    2. Supporting evidence from the paper
+    3. Any relevant caveats or limitations
+    4. Related information that might be helpful
+
+summary_types:
+  one_line:
+    prompt: "Summarize this paper in one sentence: {title} - {abstract}"
+
+  tweet:
+    prompt: "Create a 280-character tweet summarizing the key finding of this paper: {title} - {abstract}"
+
+  eli5:
+    prompt: "Explain this paper's main contribution as if to a smart high school student: {title} - {abstract}"
+
+  technical:
+    prompt: "Provide a technical summary for experts in the field: {title} - {abstract}"
+
+custom_analysis:
+  # Add your own custom analysis prompts here
+  research_gap:
+    prompt: |
+      Identify research gaps and opportunities based on this paper:
+      {content}
+
+  practical_applications:
+    prompt: |
+      List practical, real-world applications of this research:
+      {content}
+
+  critique:
+    prompt: |
+      Provide a critical analysis of the methodology and conclusions:
+      {content}
+
+  future_work:
+    prompt: |
+      Based on this paper, suggest specific future research directions and next steps:
+      {content}
