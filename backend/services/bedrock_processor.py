@@ -107,7 +107,13 @@ class BedrockProcessor:
             return response_body['content'][0]['text']
 
         except Exception as e:
-            logger.error(f"Error invoking Bedrock: {e}")
+            logger.error(
+                f"Error invoking Bedrock: {e}\n"
+                f"  Model: {self.model_id}\n"
+                f"  Region: {self.config.aws_region}\n"
+                f"  Profile: {self.config.aws_profile or '(default)'}\n"
+                f"  Error type: {type(e).__name__}"
+            )
             raise
 
     def extract_text_from_pdf(self, pdf_path: Path) -> str:

@@ -41,6 +41,10 @@ async def lifespan(app: FastAPI):
     global zotero_monitor, bedrock_processor, cache
 
     logger.info("Starting Zotero-Obsidian AI Backend...")
+    logger.info(
+        f"AWS config: profile={config.aws_profile or '(default)'}, "
+        f"region={config.aws_region}, model={config.bedrock_model_id}"
+    )
 
     # Initialize services
     zotero_monitor = ZoteroMonitor(config)
@@ -146,7 +150,12 @@ async def process_paper_queue():
             logger.info(f"Successfully processed: {paper_data['title'][:50]}...")
 
         except Exception as e:
-            logger.error(f"Queue processing error: {e}")
+            paper_title = paper_data.get('title', 'Unknown')[:60] if paper_data else 'Unknown'
+            logger.error(
+                f"Queue processing error for '{paper_title}':\n"
+                f"  {type(e).__name__}: {e}",
+                exc_info=True,
+            )
             await asyncio.sleep(5)
 
 
