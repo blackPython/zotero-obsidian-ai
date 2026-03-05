@@ -125,41 +125,49 @@ def test_fetch_new_items_filters_by_collection(monitor):
         "C3": {"name": "Biology", "parent": None, "key": "C3", "path": "Biology"},
     }
 
-    mock_zot.items.return_value = [
-        {
-            "key": "P1",
-            "data": {
-                "itemType": "journalArticle",
-                "title": "ML Paper",
-                "creators": [],
-                "collections": ["C2"],
-                "date": "2024-01-01",
-            },
-            "links": {},
+    ml_paper = {
+        "key": "P1",
+        "data": {
+            "itemType": "journalArticle",
+            "title": "ML Paper",
+            "creators": [],
+            "collections": ["C2"],
         },
-        {
-            "key": "P2",
-            "data": {
-                "itemType": "journalArticle",
-                "title": "Bio Paper",
-                "creators": [],
-                "collections": ["C3"],
-                "date": "2024-01-01",
-            },
-            "links": {},
+        "links": {},
+    }
+    bio_paper = {
+        "key": "P2",
+        "data": {
+            "itemType": "journalArticle",
+            "title": "Bio Paper",
+            "creators": [],
+            "collections": ["C3"],
         },
-        {
-            "key": "P3",
-            "data": {
-                "itemType": "journalArticle",
-                "title": "Uncategorized Paper",
-                "creators": [],
-                "collections": [],
-                "date": "2024-01-01",
-            },
-            "links": {},
+        "links": {},
+    }
+    uncat_paper = {
+        "key": "P3",
+        "data": {
+            "itemType": "journalArticle",
+            "title": "Uncategorized Paper",
+            "creators": [],
+            "collections": [],
         },
-    ]
+        "links": {},
+    }
+
+    # collection_items returns items for each collection key
+    def fake_collection_items(coll_key, **kwargs):
+        if coll_key == "C1":
+            return []  # parent has no direct items
+        elif coll_key == "C2":
+            return [ml_paper]
+        elif coll_key == "C3":
+            return [bio_paper]
+        return []
+
+    mock_zot.collection_items.side_effect = fake_collection_items
+    mock_zot.items.return_value = [ml_paper, bio_paper, uncat_paper]
 
     zm._extract_paper_data = MagicMock(side_effect=lambda item, paths: {
         "zotero_key": item["key"],

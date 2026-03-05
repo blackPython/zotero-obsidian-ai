@@ -152,9 +152,22 @@ class ZoteroMonitor:
             allowed_collections = self._expand_collection_keys(collection_keys)
             logger.info(f"Filtering to {len(allowed_collections)} collections (incl. children)")
 
-        # Get items modified in last N days (configurable)
-        since_date = (datetime.now() - timedelta(days=self.config.sync_days_back)).strftime('%Y-%m-%d')
-        items = self.zot.items(q='', since=since_date, limit=limit)
+        # Fetch items — if filtering by collection, fetch directly from each collection
+        # Otherwise fetch all recent items from the library
+        if allowed_collections:
+            items = []
+            seen_keys: Set[str] = set()
+            for coll_key in allowed_collections:
+                try:
+                    coll_items = self.zot.collection_items(coll_key, limit=limit)
+                    for item in coll_items:
+                        if item['key'] not in seen_keys:
+                            seen_keys.add(item['key'])
+                            items.append(item)
+                except Exception as e:
+                    logger.warning(f"Error fetching collection {coll_key}: {e}")
+        else:
+            items = self.zot.items(limit=limit)
 
         new_items = []
         for item in items:
