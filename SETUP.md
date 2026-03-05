@@ -10,10 +10,10 @@
 
 ## Step 1: Configure AWS Bedrock
 
-1. **Enable Bedrock in your AWS account**:
+1. **Set up an AWS CLI profile** (if you don't have one already):
    ```bash
-   aws configure
-   # Enter your AWS credentials
+   aws configure --profile your-profile-name
+   # Enter your AWS credentials when prompted
    ```
 
 2. **Request model access**:
@@ -22,7 +22,7 @@
    - Request access to Claude models
    - Wait for approval (usually instant)
 
-3. **Note your region** (e.g., `us-east-1`)
+3. **Note your profile name and region** (e.g., profile `my-research`, region `us-east-1`)
 
 ## Step 2: Get Zotero API Credentials
 
@@ -36,7 +36,8 @@
 5. Copy the generated API key
 6. Find your Library ID:
    - Go to https://www.zotero.org/settings/keys
-   - Your userID is your Library ID
+   - Your numeric **userID** is shown near the top of the page (e.g., `12345678`)
+   - This userID is what you enter as the "Library ID" in the plugin settings
 
 ## Step 3: Setup Backend Service
 
@@ -61,6 +62,7 @@ ZOTERO_LIBRARY_ID=your_library_id_here
 ZOTERO_LIBRARY_TYPE=user
 
 # AWS Configuration
+AWS_PROFILE=your_aws_profile_name
 AWS_REGION=us-east-1
 BEDROCK_MODEL_ID=anthropic.claude-3-sonnet-20240229-v1:0
 

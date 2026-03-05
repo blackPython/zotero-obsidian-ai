@@ -74,6 +74,7 @@ def mock_config(tmp_data_dir):
     cfg.zotero_library_type = "user"
     cfg.sync_days_back = 30
     cfg.sync_interval = 300
+    cfg.aws_profile = ""
     cfg.aws_region = "us-east-1"
     cfg.bedrock_model_id = "anthropic.claude-3-sonnet-20240229-v1:0"
     cfg.max_tokens = 4096

@@ -51,7 +51,7 @@ export class ZoteroAISettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName('Library ID')
-      .setDesc('Your Zotero library ID')
+      .setDesc('Your numeric Zotero userID (find it at zotero.org/settings/keys)')
       .addText((text) =>
         text
           .setPlaceholder('Enter library ID')

@@ -30,6 +30,7 @@ class Config:
     redis_url: str = field(default_factory=lambda: _env("REDIS_URL", "redis://localhost:6379/0"))
 
     # AWS Bedrock settings
+    aws_profile: str = field(default_factory=lambda: _env("AWS_PROFILE"))
     aws_region: str = field(default_factory=lambda: _env("AWS_REGION", "us-east-1"))
     bedrock_model_id: str = field(default_factory=lambda: _env("BEDROCK_MODEL_ID", "anthropic.claude-3-sonnet-20240229-v1:0"))
     max_tokens: int = field(default_factory=lambda: _env_int("MAX_TOKENS", 4096))

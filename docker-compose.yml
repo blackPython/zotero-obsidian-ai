@@ -11,9 +11,8 @@ services:
       - ZOTERO_API_KEY=${ZOTERO_API_KEY}
       - ZOTERO_LIBRARY_ID=${ZOTERO_LIBRARY_ID}
       - ZOTERO_LIBRARY_TYPE=${ZOTERO_LIBRARY_TYPE:-user}
+      - AWS_PROFILE=${AWS_PROFILE}
       - AWS_REGION=${AWS_REGION:-us-east-1}
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
       - BEDROCK_MODEL_ID=${BEDROCK_MODEL_ID:-anthropic.claude-3-sonnet-20240229-v1:0}
       - MAX_TOKENS=${MAX_TOKENS:-4096}
       - SYNC_INTERVAL=${SYNC_INTERVAL:-300}
@@ -22,6 +21,7 @@ services:
       - ./data:/app/data
       - ./config:/app/config
       - ./logs:/app/logs
+      - ~/.aws:/root/.aws:ro
     depends_on:
       redis:
         condition: service_healthy

@@ -34,10 +34,13 @@ class BedrockProcessor:
             retries={'max_attempts': 3}
         )
 
-        self.bedrock = boto3.client(
-            service_name='bedrock-runtime',
+        session = boto3.Session(
+            profile_name=config.aws_profile if config.aws_profile else None,
             region_name=config.aws_region,
-            config=bedrock_config
+        )
+        self.bedrock = session.client(
+            service_name='bedrock-runtime',
+            config=bedrock_config,
         )
 
         # Load prompt templates

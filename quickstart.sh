@@ -44,6 +44,7 @@ if [ ! -f backend/.env ]; then
 
     echo ""
     echo "AWS Configuration:"
+    read -p "AWS Profile name (from ~/.aws/credentials): " AWS_PROFILE
     read -p "AWS Region (default: us-east-1): " AWS_REGION
     AWS_REGION=${AWS_REGION:-us-east-1}
 
@@ -55,6 +56,7 @@ ZOTERO_LIBRARY_ID=$ZOTERO_LIBRARY_ID
 ZOTERO_LIBRARY_TYPE=user
 
 # AWS Configuration
+AWS_PROFILE=$AWS_PROFILE
 AWS_REGION=$AWS_REGION
 BEDROCK_MODEL_ID=anthropic.claude-3-sonnet-20240229-v1:0
 
